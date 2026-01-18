@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Classical Japanese Grammar Search</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <style>
+        body { font-family: "MS Mincho", serif; padding: 20px; background: #f4f4f9; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1, h2 { text-align: center; color: #333; }
+        .table-section { margin-bottom: 50px; border-top: 2px solid #eee; pt: 20px; }
+        table { width: 100% !important; border-collapse: collapse; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Classical Japanese Grammar Reference</h1>
+
+    <div class="table-section">
+        <h2>Verbs (動詞)</h2>
+        <table id="verbTable" class="display">
+            <thead>
+                <tr>
+                    <th>Yodan</th><th>Shimo-ichidan</th><th>Shimo-Nidan</th>
+                    <th>Kami-Ichidan</th><th>Kami-Nidan</th><th>Rahen</th>
+                    <th>Nahen</th><th>Kahen</th><th>Sahen</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="table-section">
+        <h2>Adjectives (形容詞・形容動詞)</h2>
+        <table id="adjTable" class="display">
+            <thead>
+                <tr>
+                    <th>Ku Adj</th><th>Shiku Adj</th><th>Nari Adj V</th><th>Tari Adj V</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="table-section">
+        <h2>Auxiliary Verbs (助動詞)</h2>
+        <table id="auxTable" class="display">
+            <thead>
+                <tr>
+                    <th>る</th><th>らる</th><th>す</th><th>さす</th><th>しむ</th><th>つ</th><th>ぬ</th><th>たり</th><th>り</th><th>き</th><th>けり</th><th>む</th><th>むず</th><th>らむ</th><th>けむ</th><th>めり</th><th>べし</th><th>らし</th><th>まし</th><th>なり</th><th>ず</th><th>じ</th><th>まじ</th><th>まほし</th><th>たし</th><th>ナリ</th><th>タリ</th><th>ごとし</th><th>ゆ</th><th>らゆ</th><th>す</th><th>ふ</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // --- Load Verbs ---
+        Papa.parse("Verb Conj data.csv", {
+            download: true, header: true, skipEmptyLines: true,
+            complete: function(results) {
+                $('#verbTable').DataTable({
+                    data: results.data,
+                    columns: [
+                        { data: "Yodan" }, { data: "Shimo-ichidan" }, { data: "Shimo-Nidan" },
+                        { data: "Kami-Ichidan" }, { data: "Kami-Nidan" }, { data: "Rahen" },
+                        { data: "Nahen" }, { data: "Kahen" }, { data: "Sahen" }
+                    ]
+                });
+            }
+        });
+
+        // --- Load Adjectives ---
+        Papa.parse("Adj conj data.csv", {
+            download: true, header: true, skipEmptyLines: true,
+            complete: function(results) {
+                $('#adjTable').DataTable({
+                    data: results.data,
+                    columns: [
+                        { data: "Ku Adj" }, { data: "Shiku Adj" },
+                        { data: "Nari Adj V" }, { data: "Tari Adj V" }
+                    ]
+                });
+            }
+        });
+
+        // --- Load Auxiliaries ---
+        Papa.parse("aux verb conj data.csv", {
+            download: true, header: true, skipEmptyLines: true,
+            complete: function(results) {
+                $('#auxTable').DataTable({
+                    data: results.data,
+                    columns: [
+                        { data: "る" }, { data: "らる" }, { data: "す" }, { data: "さす" }, { data: "しむ" },
+                        { data: "つ" }, { data: "ぬ" }, { data: "たり" }, { data: "り" }, { data: "き" },
+                        { data: "けり" }, { data: "む" }, { data: "むず" }, { data: "らむ" }, { data: "けむ" },
+                        { data: "めり" }, { data: "べし" }, { data: "らし" }, { data: "まし" }, { data: "なり" },
+                        { data: "ず" }, { data: "じ" }, { data: "まじ" }, { data: "まほし" }, { data: "たし" },
+                        { data: "ナリ" }, { data: "タリ" }, { data: "ごとし" }, { data: "ゆ" }, { data: "らゆ" },
+                        { data: "す" }, { data: "ふ" }
+                    ]
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
